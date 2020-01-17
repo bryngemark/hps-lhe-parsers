@@ -9,3 +9,5 @@ First to compile the parser do,
 Then run the parser with
 
 `./lhetree_SIMP.exe <input LHE file> <output root filename> <xsec> <# events>`
+
+Alternatively, one can also just do `source lhesnip.sh </path/to/lhe/file/.lhe>` assuming that the .lhe is contained in a the following structure: `../dir1/modeldir/Events/run_01/unweighted_events.lhe`
