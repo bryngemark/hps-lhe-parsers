@@ -1,4 +1,4 @@
-# simp-lhe-parser
+# hps-lhe-parsers
 
 This simple program parses .lhe files into .root files specifically for the SIMP events.
 
