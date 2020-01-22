@@ -1,12 +1,12 @@
 # hps-lhe-parsers
 
-This simple program parses .lhe files into .root files specifically for the SIMP events.
+This set of simple programs parses .lhe files into .root files for given processes.
 
-First to compile the parser do,
+First to compile the parsers do,
 
 `source build.sh`
 
-Then run the parser with
+Then run a parser with
 
 `./lhetree_SIMP.exe <input LHE file> <output root filename> <xsec> <# events>`
 
