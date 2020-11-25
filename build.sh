@@ -8,5 +8,7 @@ g++ -g `root-config --cflags` lhetree_TriTrig.cc -o lhetree_TriTrig.exe `root-co
 #g++ -g -DDEBUG `root-config --cflags` lhetree_TriTrig.cc -o lhetree_TriTrig.exe `root-config --libs`
 g++ -g `root-config --cflags` lhetree_Ap.cc -o lhetree_Ap.exe `root-config --libs`
 #g++ -g -DDEBUG `root-config --cflags` lhetree_Ap.cc -o lhetree_Ap.exe `root-config --libs`
+g++ -g `root-config --cflags` lhetree_Ap_to_ee.cc -o lhetree_Ap_to_ee.exe `root-config --libs`
+#g++ -g -DDEBUG `root-config --cflags` lhetree_Ap_to_ee.cc -o lhetree_Ap_to_ee.exe `root-config --libs`
 g++ -g `root-config --cflags` lhetree_Rad.cc -o lhetree_Rad.exe `root-config --libs`
 #g++ -g -DDEBUG `root-config --cflags` lhetree_Rad.cc -o lhetree_Rad.exe `root-config --libs`
