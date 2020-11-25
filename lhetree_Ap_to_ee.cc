@@ -12,19 +12,14 @@ using namespace std;
 
 class LHEevent {
 public:
-  LHEevent()  { };
+  LHEevent() { };
   ~LHEevent() { };
 
-  int pdgID_beam_{11};
-  int pdgID_Ap_{622};
-  int pdgID_nuc_{-623};
-  
   int pdgEl;
-  int pdgAp, pdgNuc;
+  int pdgEp, pdgEm;
 
-  TLorentzVector vEl;  //beam e-
-  TLorentzVector vAp;  //escaping Aprime
-  TLorentzVector vNuc; //target nucleus 
+  TLorentzVector vEl; //beam e-
+  TLorentzVector vEp, vEm;// outgoing e-,e+
 
   unsigned npart;
   double weight;
@@ -72,10 +67,10 @@ int main( int argc, char** argv ) {
   t->Branch( "nele", &(myevent.nele) );
   t->Branch( "pdgEl", &(myevent.pdgEl) );
   t->Branch( "vEl", &(myevent.vEl) );
-  t->Branch( "pdgAp", &(myevent.pdgAp) );
-  t->Branch( "vAp", &(myevent.vAp) );
-  t->Branch( "pdgNuc", &(myevent.pdgNuc) );
-  t->Branch( "vNuc", &(myevent.vNuc) );
+  t->Branch( "pdgEp", &(myevent.pdgEp) );
+  t->Branch( "vEp", &(myevent.vEp) );
+  t->Branch( "pdgEm", &(myevent.pdgEm) );
+  t->Branch( "vEm", &(myevent.vEm) );
 
   int fill_count=0;
   int line_count=0;
@@ -97,7 +92,7 @@ int main( int argc, char** argv ) {
 #endif
       line_count++;
       
-      if ( pdgid == myevent.pdgID_beam_ && status==1){ //find beam e-
+      if ( pdgid == 11 && status==1){ //find beam e-
 		myevent.vEl.SetPxPyPzE(px,py,pz,e);
 		myevent.pdgEl = pdgid;
 		ele_count++;
@@ -105,21 +100,21 @@ int main( int argc, char** argv ) {
 #ifdef DEBUG
 	cout << "found beam e pdg: " << myevent.pdgEl << "\tpx: " << myevent.vEl.Px() << endl;
 #endif
-      } else if ( pdgid == myevent.pdgID_nuc_  && status==1){ //find outgoing target nucleus
-		myevent.vNuc.SetPxPyPzE(px,py,pz,e);
-		myevent.pdgNuc = pdgid;
-		//		ele_count++;
+      } else if ( pdgid == 611 && status==1){ //find outgoing e- (from A')
+		myevent.vEm.SetPxPyPzE(px,py,pz,e);
+		myevent.pdgEm = pdgid;
+		ele_count++;
 	
 #ifdef DEBUG
-	cout << "found target nucleus pdg: " << myevent.pdgNuc << "\tpx: " << myevent.vNuc.Px() << endl;
+	cout << "found e- pdg: " << myevent.pdgEm << "\tpx: " << myevent.vEm.Px() << endl;
 #endif
-      } else if ( pdgid == myevent.pdgID_Ap_ && status==1){ //find outgoing A'
-		myevent.vAp.SetPxPyPzE(px,py,pz,e);
-		myevent.pdgAp = pdgid;
-		//ele_count++;
+      } else if ( pdgid == -611 && status==1){ //find outgoing e+ (from A')
+		myevent.vEp.SetPxPyPzE(px,py,pz,e);
+		myevent.pdgEp = pdgid;
+		ele_count++;
 	
 #ifdef DEBUG
-	cout << "found A' pdg: " << myevent.pdgAp << "\tpx: " << myevent.vAp.Px() << endl;
+	cout << "found e+ pdg: " << myevent.pdgEp << "\tpx: " << myevent.vEp.Px() << endl;
 #endif
       }
       
@@ -154,8 +149,8 @@ int main( int argc, char** argv ) {
       }
       
       line_count=0;
-      myevent.vNuc.SetPxPyPzE(0.,0.,0.,0.);
-      myevent.vAp.SetPxPyPzE(0.,0.,0.,0.);
+      myevent.vEm.SetPxPyPzE(0.,0.,0.,0.);
+      myevent.vEp.SetPxPyPzE(0.,0.,0.,0.);
       myevent.vEl.SetPxPyPzE(0.,0.,0.,0.);
       ele_count=0;
     }
