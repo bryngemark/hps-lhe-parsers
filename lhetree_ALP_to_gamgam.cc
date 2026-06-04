@@ -172,6 +172,8 @@ int main( int argc, char** argv ) {
       cout << "!npart" << endl;
 #endif
       myevent.nele = ele_count;
+      myevent.ngamma = gam_count;
+      myevent.nALP = ALP_count;
       
       if( myevent.nele || myevent.ngamma || myevent.nALP){
 		t->Fill();
@@ -189,6 +191,8 @@ int main( int argc, char** argv ) {
       myevent.vALP.SetPxPyPzE(0.,0.,0.,0.);
       myevent.vEl.SetPxPyPzE(0.,0.,0.,0.);
       ele_count=0;
+      gam_count=0;
+      ALP_count=0;
     }
     npart--;
   }
